@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Greenfield Public School</title>
+  <meta name="description" content="Single-file, responsive school website template with a premium glassmorphism look." />
+  <style>
+    :root{
+      --bg:#0b1220; /* deep navy */
+      --glass-bg: rgba(255,255,255,.08);
+      --glass-stroke: rgba(255,255,255,.18);
+      --text:#e9eefc;
+      --muted:#b8c3e0;
+      --brand:#6ce5b1; /* mint */
+      --brand-2:#7ab6ff; /* blue */
+      --accent:#ffd36e; /* sunshine */
+      --danger:#ff7b89;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --blur: 14px;
+      --maxw: 1150px;
+    }/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 1200px at 10% -10%, #1b2a4a 0%, transparent 60%),
+    radial-gradient(900px 900px at 120% 10%, #10334f 0%, transparent 50%),
+    radial-gradient(900px 900px at 40% 120%, #1a3a34 0%, transparent 55%),
+    var(--bg);
+  line-height:1.5;
+  scroll-behavior:smooth;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:100%;max-width:var(--maxw);margin:auto;padding:0 18px}
+.glass{background:var(--glass-bg); backdrop-filter: blur(var(--blur));
+  border:1px solid var(--glass-stroke); border-radius:var(--radius); box-shadow:var(--shadow)}
+.btn{display:inline-block;padding:12px 18px;border-radius:14px;font-weight:600;border:1px solid transparent}
+.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#041018}
+.btn.ghost{border-color:var(--glass-stroke); background:rgba(255,255,255,.03); color:var(--text)}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-size:12px;color:#062014;background:linear-gradient(135deg,var(--brand),var(--accent)); font-weight:700}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(5,10,20,.45);backdrop-filter: blur(10px); border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800}
+.logo .mark{width:36px;height:36px;border-radius:12px;background:conic-gradient(from 210deg at 50% 50%, var(--brand), var(--brand-2), var(--accent)); box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.menu{display:flex;gap:18px;align-items:center}
+.menu a{opacity:.9}
+.menu a:hover{opacity:1}
+.burger{display:none; width:40px; height:40px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04)}
+
+/* Mobile menu */
+#mobileMenu{display:none; position:fixed; inset:68px 10px auto 10px; background:rgba(10,20,35,.9); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:14px}
+#mobileMenu a{display:block;padding:12px;border-radius:12px}
+#mobileMenu a:hover{background:rgba(255,255,255,.06)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center;padding:40px 0 26px}
+.hero-card{padding:28px}
+.hero h1{font-size:clamp(28px, 5vw, 42px);margin:8px 0 12px;line-height:1.15}
+.hero p{color:var(--muted)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.stat{padding:16px;text-align:center}
+.stat h3{margin:0;font-size:24px}
+.stat p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+.hero-art{position:relative;height:100%}
+.badge{position:absolute;right:14px;top:14px}
+.canvas{aspect-ratio:4/3;border-radius:16px;background:
+  radial-gradient(500px 300px at 70% -10%, rgba(122,182,255,.35), transparent 60%),
+  radial-gradient(500px 300px at 40% 120%, rgba(108,229,177,.28), transparent 60%),
+  linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow: var(--shadow);
+  position:relative; overflow:hidden;
+}
+.floating{position:absolute; inset:auto; width:140px; height:140px; border-radius:22px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.08); animation:float 6s ease-in-out infinite; box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.floating.one{left:12%; top:16%}
+.floating.two{right:10%; bottom:12%; animation-delay:1.2s}
+.floating.three{left:40%; bottom:8%; width:110px; height:110px; animation-delay:.4s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* Notice Ticker */
+.ticker{margin-top:14px; overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.14)}
+.ticker .row{display:flex; gap:28px; padding:10px 14px; background:rgba(255,255,255,.04); white-space:nowrap; animation:scroll 22s linear infinite}
+.ticker .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.12)}
+.ticker .pill i{font-style:normal; opacity:.7}
+@keyframes scroll{ to{ transform:translateX(-50%);} }
+
+/* Sections shared */
+section{padding:44px 0}
+h2.section-title{font-size:26px; margin:0 0 18px}
+.grid{display:grid; gap:16px}
+
+/* Cards layout */
+.cards{grid-template-columns:repeat(3,1fr)}
+.card{padding:18px; position:relative}
+.card h3{margin:6px 0 8px}
+.card p{margin:0;color:var(--muted)}
+
+/* Events */
+.events{grid-template-columns:2fr 1fr}
+.event{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:center; padding:14px; border-left:3px solid var(--brand)}
+.date{display:grid; place-items:center; width:64px; height:64px; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12)}
+.date b{font-size:20px; line-height:1}
+.date small{opacity:.7}
+
+/* Gallery */
+.gallery{grid-template-columns:repeat(6,1fr)}
+.gallery figure{aspect-ratio:1/1; border-radius:14px; overflow:hidden; position:relative; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04)}
+.gallery figcaption{position:absolute; inset:auto 8px 8px 8px; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:10px; font-size:12px}
+
+/* Testimonials */
+.testi{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.quote{padding:16px; position:relative}
+.quote:before{content:"\201C"; position:absolute; font-size:60px; opacity:.15; top:-16px; left:10px}
+.quote b{display:block;margin-top:8px}
+
+/* Contact */
+form .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+input, textarea{width:100%; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:12px 14px; color:var(--text); outline:none}
+textarea{min-height:120px; resize:vertical}
+
+/* Footer */
+footer{padding:28px 0; color:var(--muted)}
+.foot{display:grid; grid-template-columns:2fr 1fr 1fr; gap:18px}
+.foot ul{list-style:none; padding:0; margin:0}
+.foot li{margin:8px 0}
+.copyright{margin-top:16px; font-size:13px; opacity:.8}
+
+/* Responsive */
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cards{grid-template-columns:1fr 1fr}
+  .events{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(3,1fr)}
+  .testi{grid-template-columns:1fr 1fr}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 640px){
+  .menu{display:none}
+  .burger{display:inline-grid; place-items:center}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  form .row{grid-template-columns:1fr}
+  .testi{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="glass">
+    <div class="container nav">
+      <div class="logo">
+        <div class="mark" aria-hidden="true"></div>
+        <a href="#home" aria-label="Greenfield Public School home"><span>Greenfield Public School</span></a>
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#academics">Academics</a>
+        <a href="#admissions">Admissions</a>
+        <a href="#events">Events</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+  <nav id="mobileMenu" aria-label="Mobile">
+    <a href="#about">About</a>
+    <a href="#academics">Academics</a>
+    <a href="#admissions">Admissions</a>
+    <a href="#events">Events</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>  <!-- Hero -->  <main id="home" class="container">
+    <section class="hero">
+      <article class="hero-card glass">
+        <span class="tag">🏫 CBSE • Co‑ed • K‑12</span>
+        <h1>Shaping curious minds with care, discipline, and creativity.</h1>
+        <p>Welcome to Greenfield Public School — a safe, inclusive campus where students thrive in academics, sports, and life skills. Built with values, powered by innovation.</p>
+        <div class="cta">
+          <a class="btn primary" href="#admissions">Apply Now</a>
+          <a class="btn ghost" href="#about">Take a Tour</a>
+        </div>
+        <div class="stats">
+          <div class="stat glass"><h3 id="s1">1200+</h3><p>Students</p></div>
+          <div class="stat glass"><h3 id="s2">85+</h3><p>Qualified Staff</p></div>
+          <div class="stat glass"><h3 id="s3">25</h3><p>Smart Classrooms</p></div>
+          <div class="stat glass"><h3 id="s4">15+</h3><p>Clubs & Societies</p></div>
+        </div>
+        <div class="ticker glass" aria-label="Latest notices">
+          <div class="row">
+            <span class="pill">📢 <i>Notice</i> Parent‑Teacher Meet on 12 Sept</span>
+            <span class="pill">🏆 <i>Result</i> Inter‑School Debate winners announced</span>
+            <span class="pill">🚌 <i>Transport</i> New route added: Sector‑7</span>
+            <span class="pill">📅 <i>Exam</i> Half‑yearly timetable uploaded</span>
+            <span class="pill">🎉 <i>Fest</i> Annual Day on 18 Oct</span>
+            <!-- duplicate for seamless loop -->
+            <span class="pill">📢 <i>Notice</i> Parent‑Teacher Meet on 12 Sept</span>
+            <span class="pill">🏆 <i>Result</i> Inter‑School Debate winners announced</span>
+            <span class="pill">🚌 <i>Transport</i> New route added: Sector‑7</span>
+            <span class="pill">📅 <i>Exam</i> Half‑yearly timetable uploaded</span>
+            <span class="pill">🎉 <i>Fest</i> Annual Day on 18 Oct</span>
+          </div>
+        </div>
+      </article><aside class="hero-art">
+    <div class="badge tag">100% Board Results</div>
+    <div class="canvas">
+      <!-- Decorative floating glass cards -->
+      <div class="floating one"></div>
+      <div class="floating two"></div>
+      <div class="floating three"></div>
+    </div>
+  </aside>
+</section>
+
+  </main>  <!-- About & Academics -->  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Our School</h2>
+      <div class="grid cards">
+        <article class="card glass">
+          <h3>Our Vision</h3>
+          <p>To nurture responsible, confident citizens with strong values, scientific temper, and global outlook.</p>
+        </article>
+        <article class="card glass">
+          <h3>Campus & Safety</h3>
+          <p>Monitored entries, infirmary, RO water, safe transport, and a green eco‑friendly campus.</p>
+        </article>
+        <article class="card glass">
+          <h3>Holistic Growth</h3>
+          <p>Emphasis on academics, sports, arts, coding, and public speaking for all‑round development.</p>
+        </article>
+      </div>
+    </div>
+  </section>  <section id="academics">
+    <div class="container">
+      <h2 class="section-title">Academics</h2>
+      <div class="grid cards">
+        <article class="card glass">
+          <h3>Primary (I–V)</h3>
+          <p>Foundational literacy & numeracy, activity‑based learning, and joyful classrooms.</p>
+        </article>
+        <article class="card glass">
+          <h3>Middle (VI–VIII)</h3>
+          <p>STEM labs, projects, field trips, coding club, Olympiad prep and life skills.</p>
+        </article>
+        <article class="card glass">
+          <h3>Secondary (IX–XII)</h3>
+          <p>Science, Commerce & Humanities streams with career guidance and boards preparation.</p>
+        </article>
+      </div>
+    </div>
+  </section>  <!-- Admissions & Facilities -->  <section id="admissions">
+    <div class="container">
+      <h2 class="section-title">Admissions</h2>
+      <div class="grid cards">
+        <article class="card glass">
+          <h3>How to Apply</h3>
+          <p>Download the form, attach documents, and submit at the school office or via email.</p>
+        </article>
+        <article class="card glass">
+          <h3>Eligibility</h3>
+          <p>Age as on 31st March; interaction for Primary, written test for higher classes.</p>
+        </article>
+        <article class="card glass">
+          <h3>Fee & Scholarships</h3>
+          <p>Transparent fee structure. Merit & sports scholarships available.</p>
+        </article>
+      </div>
+    </div>
+  </section>  <section id="events">
+    <div class="container">
+      <h2 class="section-title">Upcoming Events</h2>
+      <div class="grid events">
+        <div class="grid" style="gap:12px">
+          <article class="event glass">
+            <div class="date"><b>12</b><small>Sept</small></div>
+            <div>
+              <h3>Parent‑Teacher Meeting</h3>
+              <p class="muted">9:30 AM • Main Auditorium</p>
+            </div>
+          </article>
+          <article class="event glass">
+            <div class="date"><b>27</b><small>Sept</small></div>
+            <div>
+              <h3>Science Exhibition</h3>
+              <p class="muted">10:00 AM • Innovation Lab</p>
+            </div>
+          </article>
+          <article class="event glass">
+            <div class="date"><b>18</b><small>Oct</small></div>
+            <div>
+              <h3>Annual Day Celebration</h3>
+              <p class="muted">5:30 PM • Sports Ground</p>
+            </div>
+          </article>
+        </div>
+        <aside class="glass" style="padding:16px">
+          <h3 style="margin:6px 0 8px">Quick Links</h3>
+          <ul style="line-height:2; padding-left:16px">
+            <li><a href="#">Download Prospectus</a></li>
+            <li><a href="#">Transport Routes</a></li>
+            <li><a href="#">Holiday List</a></li>
+            <li><a href="#">Exam Timetable</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>  <!-- Gallery -->  <section id="gallery">
+    <div class="container">
+      <h2 class="section-title">Campus Gallery</h2>
+      <div class="grid gallery">
+        <!-- Using inline SVG placeholders to keep this single-file -->
+        <figure class="glass"> <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6ce5b1"/><stop offset="1" stop-color="#7ab6ff"/></linearGradient></defs><rect fill="url(#g1)" width="100" height="100"/></svg><figcaption>Smart Classroom</figcaption></figure>
+        <figure class="glass"> <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%"><defs><linearGradient id="g2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd36e"/><stop offset="1" stop-color="#7ab6ff"/></linearGradient></defs><rect fill="url(#g2)" width="100" height="100"/></svg><figcaption>Library</figcaption></figure>
+        <figure class="glass"> <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%"><defs><linearGradient id="g3" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6ce5b1"/><stop offset="1" stop-color="#ffd36e"/></linearGradient></defs><rect fill="url(#g3)" width="100" height="100"/></svg><figcaption>Science Lab</figcaption></figure>
+        <figure class="glass"> <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7ab6ff"/><stop offset="1" stop-color="#6ce5b1"/></linearGradient></defs><rect fill="url(#g4)" width="100" height="100"/></svg><figcaption>Playground</figcaption></figure>
+        <figure class="glass"> <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%"><defs><linearGradient id="g5" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7ab6ff"/><stop offset="1" stop-color="#ffd36e"/></linearGradient></defs><rect fill="url(#g5)" width="100" height="100"/></svg><figcaption>Art Studio</figcaption></figure>
+        <figure class="glass"> <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%"><defs><linearGradient id="g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd36e"/><stop offset="1" stop-color="#6ce5b1"/></linearGradient></defs><rect fill="url(#g6)" width="100" height="100"/></svg><figcaption>Auditorium</figcaption></figure>
+      </div>
+    </div>
+  </section>  <!-- Testimonials -->  <section id="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Parents Say</h2>
+      <div class="testi" id="testi">
+        <article class="quote glass">
+          "My child loves going to school now. Excellent teachers and very safe campus."
+          <b>— Mrs. Sharma</b>
+        </article>
+        <article class="quote glass">
+          "Great balance of studies and co‑curriculars. The coding club is a big plus!"
+          <b>— Mr. Khan</b>
+        </article>
+        <article class="quote glass">
+          "Transparent communication, supportive staff, and wonderful results."
+          <b>— Ms. Verma</b>
+        </article>
+      </div>
+    </div>
+  </section>  <!-- Contact -->  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="grid cards">
+        <article class="card glass">
+          <h3>Address</h3>
+          <p>Greenfield Public School<br>NH‑28, Muzaffarpur, Bihar 842001</p>
+          <p><b>Phone:</b> +91‑98765‑43210<br><b>Email:</b> info@greenfield.edu.in</p>
+          <p><b>Office Hours:</b> Mon–Sat, 8:00 AM – 3:00 PM</p>
+        </article>
+        <article class="card glass">
+          <h3>Send a Message</h3>
+          <form onsubmit="event.preventDefault(); alert('Thanks! We\'ll get back to you soon.'); this.reset();">
+            <div class="row">
+              <label>
+                <span class="sr-only">Your Name</span>
+                <input required placeholder="Your Name" />
+              </label>
+              <label>
+                <span class="sr-only">Email</span>
+                <input type="email" required placeholder="Email" />
+              </label>
+            </div>
+            <label>
+              <span class="sr-only">Message</span>
+              <textarea required placeholder="Your Message"></textarea>
+            </label>
+            <div style="margin-top:10px"><button class="btn primary" type="submit">Submit</button></div>
+          </form>
+        </article>
+        <article class="card glass">
+          <h3>Why Choose Us?</h3>
+          <ul style="line-height:1.9; padding-left:18px; margin:0">
+            <li>Experienced, caring teachers</li>
+            <li>Smart classes & labs</li>
+            <li>Sports & performing arts</li>
+            <li>Active parent connect</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>  <!-- Footer -->  <footer>
+    <div class="container glass" style="padding:18px">
+      <div class="foot">
+        <div>
+          <h3 style="margin:6px 0 8px">Greenfield Public School</h3>
+          <p>Affiliated to CBSE • Co‑educational • English Medium</p>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="
